@@ -18,48 +18,48 @@ module.exports = {
 
     // Connect to database
     startup: function(dbToUse) {
-        
+
         // Connect mongoose and select db
         mongoose.connect(dbToUse);
-        
+
         // Add listener for opened connection
         mongoose.connection.on('open', function() {
             console.log('Connected to database!');
         });
     },
-    
-    
+
+
     // Get all products
     getAll: function(callback) {
-      
+
         var query = Product.find({});
         query.exec(function(err, products) {
-           
+
            callback(err, products);
         });
-      
+
     },
-  
+
     // Get featured products
     getFeatured: function(callback) {
-        
+
         // Find products where featured is true
         var query = Product.find({featured : true});
-        query.exec(function(err, featuredProducts) { 
-            
+        query.exec(function(err, featuredProducts) {
+
             // Execute callback
             callback(null, featuredProducts);
         });
     },
-  
-  
+
+
     // Find product for ID
     findProductByID: function(id, callback) {
-        
+
         // Find product where _id matches given ID
         var query = Product.findOne({_id : id});
-        query.exec(function(err, product) {  
-            
+        query.exec(function(err, product) {
+
             // Execute callback passed from route
             callback(null, product);
         });

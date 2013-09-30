@@ -7,15 +7,15 @@ module.exports = {
 
     // Get shop home page
     getHome: function(req, res) {
-        
+
         // Get categories for top nav
         db.getTopCategories(function(err, categories) {
             if (err) {console.log(err)}
-            
+
             // Get featured products
-            db.getFeatured(function(err, featured) { 
+            db.getFeatured(function(err, featured) {
                 if (err) {console.log(err)}
-                
+
                 // Render home page
                 res.render('main/home', {
                     store: config.store.name,
@@ -32,11 +32,11 @@ module.exports = {
 
     // Get about page
     getAbout: function(req, res) {
-        
+
         // Get categories for top nav
         db.getTopCategories(function(err, categories) {
             if (err) {console.log(err)}
-            
+
             // Render contact page
             res.render('main/about', {
                 store: config.store.name,
@@ -48,14 +48,14 @@ module.exports = {
             });
         });
     },
-    
+
     // Get contact page
     getContact: function(req, res) {
-        
+
         // Get categories for top nav
         db.getTopCategories(function(err, categories) {
             if (err) {console.log(err)}
-            
+
             // Render contact page
             res.render('main/contact', {
                 store: config.store.name,

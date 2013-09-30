@@ -7,10 +7,10 @@ module.exports = {
 
     // Get shop home page
     getHome: function(req, res) {
-        
+
       db.getAll(function(err, products) {
-        
-        
+
+
         // Render home page
         res.render('products/home', {
             store: config.store.name,
@@ -21,13 +21,13 @@ module.exports = {
         });
       });
     },
-    
+
     // Get product by ID
     getByID: function(req, res) {
-        
+
       db.findProductByID(req.params.id, function(err, product) {
-        
-        
+
+
         // Render home page
         res.render('products/product', {
             store: config.store.name,

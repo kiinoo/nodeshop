@@ -15,14 +15,16 @@ console.log('NodeShop Started!');
 // Connect to database
 database.startup(config.connection);
 console.log('Connecting to database...');
-  
+
+
+app.set('port', process.env.PORT || 3000);
 // Configure Express
 app.configure(function(){
-    
+
     // Set up jade
     app.set('views', __dirname + '/shop/views');
     app.set('view engine', 'jade');
-    
+
     app.use(express.favicon());
     app.use(express.cookieParser());
     app.use(express.bodyParser());
@@ -36,23 +38,23 @@ app.configure(function(){
         // Get session secret from config file
         secret: config.cookie_secret
         }));
-    
+
     // Set up passport
     app.use(passport.initialize());
     app.use(passport.session());
-    
+
     // Define public assets
     app.use(express.static(__dirname + '/shop/public'));
-  
+
 });
-    
+
 // Require router, passing passport for authenticating pages
 require('./shop/router')(app, passport);
 
 // Listen for requests
-app.listen(process.env.PORT);
+app.listen(app.get('port'));
 
-console.log('NodeShop v' + info.version + ' listening on port ' + process.env.PORT);
+console.log('NodeShop v' + info.version + ' listening on port ' + app.get('port'));
 
 // Handle all uncaught errors
 process.on('uncaughtException', function(err) {
